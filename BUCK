@@ -1,9 +1,9 @@
 exported_linux_headers = {
-  'jconfig.h': 'jconfig.cfg',
+  'jconfig.h': 'jconfig.doc',
 }
 
 exported_macos_headers = {
-  'jconfig.h': 'jconfig.cfg',
+  'jconfig.h': 'jconfig.doc',
 }
 
 exported_windows_headers = {
@@ -23,8 +23,10 @@ cxx_library(
     ('^windows.*', exported_windows_headers),
   ],
   srcs = glob([
+    'jaricom.c',
     'jcapimin.c',
     'jcapistd.c',
+    'jcarith.c',
     'jccoefct.c',
     'jccolor.c',
     'jcdctmgr.c',
