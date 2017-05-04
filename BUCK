@@ -1,12 +1,28 @@
+exported_linux_headers = {
+  'jconfig.h': 'jconfig.linux',
+}
+
+exported_macos_headers = {
+  'jconfig.h': 'jconfig.linux',
+}
+
+exported_windows_headers = {
+  'jconfig.h': 'jconfig.mgw',
+  # 'jconfig.h': 'vc6proj/jconfig.h',
+}
+
 cxx_library(
   name = 'libjpeg',
   header_namespace = '',
-  preprocessor_flags = [
-    '-DHAVE_PROTOTYPES=1'
-  ],
   exported_headers = subdir_glob([
     ('', '*.h'),
   ]),
+  exported_platform_headers = [
+    ('default', exported_linux_headers),
+    ('^linux.*', exported_linux_headers),
+    ('^macos.*', exported_macos_headers),
+    ('^windows.*', exported_windows_headers),
+  ],
   srcs = glob([
     'jcapimin.c',
     'jcapistd.c',
@@ -53,9 +69,8 @@ cxx_library(
     'jquant2.c',
     'jutils.c',
     'jmemmgr.c',
-    'jmemansi.c'
+    'jmemansi.c',
   ]),
-
   visibility = [
     'PUBLIC',
   ],
